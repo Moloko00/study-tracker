@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Study Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div>
+        <h1>Study Tracker</h1>
+        <p>Track your daily and weekly learning progress.</p>
+      </div>
+      <button id="themeToggle" class="btn secondary" aria-label="Toggle theme">🌙 Dark mode</button>
+    </header>
+
+    <section class="dashboard-grid">
+      <article class="card stat-card">
+        <h2>Today</h2>
+        <p class="stat-value" id="todayHours">0.0h</p>
+      </article>
+      <article class="card stat-card">
+        <h2>This Week</h2>
+        <p class="stat-value" id="weekHours">0.0h</p>
+      </article>
+      <article class="card stat-card">
+        <h2>Average / Day</h2>
+        <p class="stat-value" id="avgHours">0.0h</p>
+      </article>
+      <article class="card stat-card">
+        <h2>Best Day (Week)</h2>
+        <p class="stat-value" id="bestDay">-</p>
+      </article>
+      <article class="card stat-card">
+        <h2>Most Studied Subject</h2>
+        <p class="stat-value" id="mostSubject">-</p>
+      </article>
+      <article class="card stat-card">
+        <h2>Total Sessions</h2>
+        <p class="stat-value" id="totalSessions">0</p>
+      </article>
+    </section>
+
+    <section class="card goal-card">
+      <div class="goal-head">
+        <h2>Daily Goal Progress (7h)</h2>
+        <span id="goalText">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="goalBar"></div>
+      </div>
+      <p id="goalStatus" class="muted">Keep going—you can do it.</p>
+      <p id="streak" class="streak">🔥 Streak: 0 days</p>
+    </section>
+
+    <section class="two-col">
+      <article class="card">
+        <div class="section-head">
+          <h2>Quick Add Study Session</h2>
+        </div>
+        <form id="sessionForm" class="session-form">
+          <label>
+            Subject
+            <select name="subject" required>
+              <option value="Mathematics">Real Analysis</option>
+              <option value="Computer Science">Combinatorics</option>
+               <option value="Computer Science">Differential Equations</option>
+              <option value="Cloud/DevOps">Cloud/DevOps</option>
+            </select>
+          </label>
+          <label>
+            Topic Covered
+            <input type="text" name="topic" placeholder="e.g. linear algebra" required />
+          </label>
+          <label>
+            Date
+            <input type="date" name="date" required />
+          </label>
+          <div class="time-row">
+            <label>
+              Start Time
+              <input type="time" name="startTime" required />
+            </label>
+            <label>
+              End Time
+              <input type="time" name="endTime" required />
+            </label>
+          </div>
+          <label>
+            Notes (optional)
+            <textarea name="notes" rows="3" placeholder="What did you focus on?"></textarea>
+          </label>
+          <input type="hidden" name="editingId" value="" />
+          <p class="form-error" id="formError" role="alert"></p>
+          <button type="submit" class="btn">Save Session</button>
+        </form>
+      </article>
+
+      <article class="card">
+        <h2>Charts</h2>
+        <h3>Daily Hours (Last 7 Days)</h3>
+        <div id="dailyChart" class="chart"></div>
+        <h3>Weekly Hours (Last 6 Weeks)</h3>
+        <div id="weeklyChart" class="chart"></div>
+      </article>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <h2>Study Sessions</h2>
+        <label class="filter">
+          Filter by subject
+          <select id="subjectFilter">
+            <option value="All">All</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Cloud/DevOps">Cloud/DevOps</option>
+          </select>
+        </label>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Subject</th>
+              <th>Topic</th>
+              <th>Time</th>
+              <th>Duration</th>
+              <th>Notes</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="sessionTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Weekly Summary by Subject</h2>
+      <ul id="weeklySummary" class="summary-list"></ul>
+    </section>
+  </div>
+
+  <template id="barTemplate">
+    <div class="bar-item">
+      <span class="bar-label"></span>
+      <div class="bar-track"><div class="bar-fill"></div></div>
+      <span class="bar-value"></span>
+    </div>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
